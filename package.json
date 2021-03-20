@@ -1,0 +1,10 @@
+{
+	"name": "Capped Stats",
+	"version": "1.0.0",
+	"description": "big numbers are very scary. :( low numbers are not scary! :)",
+	"homepage": "https://github.com/EL20202/cc-uncapped-stats",
+	"module": true,
+	"prestart": "prestart.js",
+	"ccmodDependencies": {
+	}
+}
