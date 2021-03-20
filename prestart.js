@@ -157,7 +157,7 @@ sc.StatusParamBar.inject({
             signed: this.usePercent,
             transitionTime: 0.2
         });
-        this.base.setPos(83 + 16 - ((this.usePercent ^ j) ? 8 : 0), 3);
+        this.base.setPos(83 + 16 - (this.usePercent ? 8 : j ? 0 : -8), 3);
         this.base.setNumber(0, true);
         this.guis.push(this.base);
         this.addTransitions(this.base);
@@ -167,7 +167,7 @@ sc.StatusParamBar.inject({
             signed: this.usePercent,
             transitionTime: 0.2
         });
-        this.equip.setPos(127 + 16 - ((this.usePercent ^ j) ? 8 : 0), 3);
+        this.equip.setPos(127 + 16 - (this.usePercent ? 8 : j ? 0 : -8), 3);
         this.equip.setNumber(0, true);
         this.guis.push(this.equip);
         this.addTransitions(this.equip);
@@ -180,7 +180,7 @@ sc.StatusParamBar.inject({
         });
         this.equipAdd.showPlus = true;
         this.equipAdd.showPlusOnZero = true;
-        this.equipAdd.setPos(127 + 16 - ((this.usePercent ^ j) ? 8 : 0), 13);
+        this.equipAdd.setPos(127 + 16 - (this.usePercent ? 8 : j ? 0 : -8), 13);
         this.addTransitions(this.equipAdd);
         this.guis.push(this.equipAdd);
         this.equipAdd.doStateTransition("HIDDEN", true);
@@ -190,7 +190,7 @@ sc.StatusParamBar.inject({
             signed: this.usePercent,
             transitionTime: 0.2
         });
-        this.skills.setPos(171 + 16 - ((this.usePercent ^ j) ? 8 : 0), 3);
+        this.skills.setPos(171 + 16 - (this.usePercent ? 8 : j ? 0 : -8), 3);
         this.skills.setNumber(0, true);
         this.guis.push(this.skills);
         this.addTransitions(this.skills);
@@ -204,7 +204,7 @@ sc.StatusParamBar.inject({
         });
         this.skillAdd.showPlus = true;
         this.skillAdd.showPlusOnZero = true;
-        this.skillAdd.setPos(171 + 16 - ((this.usePercent ^ j) ? 8 : 0), 13);
+        this.skillAdd.setPos(171 + 16 - (this.usePercent ? 8 : j ? 0 : -8), 13);
         this.skillAdd.setNumber(0, true);
         this.addTransitions(this.skillAdd);
         this.guis.push(this.skillAdd);
