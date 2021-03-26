@@ -1,0 +1,16 @@
+{
+    "id": "cc-capped-stats",
+	"version": "1.0.0",
+
+	"title": "Capped Stats",
+	"description": "Adds a visual stat cap - see your stats for what they really aren't!",
+	
+	"prestart": "prestart.js",
+    "icons": {
+        "24": "icon.png"
+    },
+
+	"dependencies": {
+        "ccloader": "^2.20.0"
+	}
+}

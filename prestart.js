@@ -92,7 +92,7 @@ sc.EquipStatusContainer.inject({
         this.modPanel = a;
         for (var e in sc.MODIFIERS) {
             b = sc.MODIFIERS[e];
-            b = this._createStatusDisplay(0, 0, "modifier." + e, 5, b.icon, true, sc.MAX_MOD_VAL, 1, b.noPercent || false, a, e, b.order);
+            b = this._createStatusDisplay(0, 0, "modifier." + e, 5, b.icon, true, 9, 1, b.noPercent || false, a, e, b.order);
             b.doStateTransition("HIDDEN", true);
             this.allModifiers[e] = b
         }
@@ -129,6 +129,13 @@ sc.StatusViewMainParameters.inject({
         this.baseParams.def = this.createStatusDisplay(0, a, "def", 0, 2, false, 9);
         a = a + 14;
         this.baseParams.foc = this.createStatusDisplay(0, a, "foc", 0, 3, false, 9);
+        a = a + 18;
+        this.baseParams.fire = this.createStatusDisplay(0, a, "res", 1, 4, true, 9);
+        a = a + 14;
+        this.baseParams.cold = this.createStatusDisplay(0, a, "res", 2, 5, true, 9);
+        a = a + 14;
+        this.baseParams.shock = this.createStatusDisplay(0, a, "res", 3, 6, true, 9);
+        this.baseParams.wave = this.createStatusDisplay(0, a + 14, "res", 4, 7, true, 9);
     }
 })
 
@@ -272,9 +279,62 @@ sc.TradeToggleStats.inject({
         this.addChildGui(d);
         for (var c in sc.MODIFIERS) {
             b = sc.MODIFIERS[c];
-            b = this._createStatusDisplay(this.lineOffset, 0, "modifier." + c, 5, b.icon, true, sc.MAX_MOD_VAL, 1, void 0, b.noPercent || false, c, b.order);
+            b = this._createStatusDisplay(this.lineOffset, 0, "modifier." + c, 5, b.icon, true, 9, 1, void 0, b.noPercent || false, c, b.order);
             b.doStateTransition("HIDDEN", true);
             this.modifierPool[c] = b
         }
+    }
+})
+
+sc.ItemStatusDefaultBar.inject({
+    init(a, b, c, d, e, f) {
+        this.parent();
+        this.removeAllChildren();
+        this.setSize(d || 126, 14);
+            this.barHeight = e || 0;
+            this.buff = c || null;
+            this.type = b || sc.MENU_BAR_TYPE.HP;
+            this.model = sc.model.player;
+            a = new sc.TextGui(a, {
+                font: sc.fontsystem.tinyFont,
+                speed: ig.TextBlock.SPEED.IMMEDIATE
+            });
+            a.setPos(3, f);
+            this.addChildGui(a);
+            if (this.type != sc.MENU_BAR_TYPE.BUFF) {
+                f = 0;
+                switch (this.type) {
+                    case sc.MENU_BAR_TYPE.HP:
+                        f = 9;
+                        break;
+                    case sc.MENU_BAR_TYPE.EXP:
+                        f = sc.EXP_PER_LEVEL;
+                        break;
+                    case sc.MENU_BAR_TYPE.SP:
+                        f = 9
+                }
+                this.maxNumber = new sc.NumberGui(f);
+                this.maxNumber.setAlign(ig.GUI_ALIGN.X_RIGHT, ig.GUI_ALIGN.Y_TOP);
+                this.maxNumber.setPos(6, 0);
+                this.addChildGui(this.maxNumber);
+                this.currentNumber = new sc.NumberGui(f, {
+                    transitionTime: 0.2
+                });
+                this.currentNumber.setAlign(ig.GUI_ALIGN.X_RIGHT,
+                    ig.GUI_ALIGN.Y_TOP);
+                this.currentNumber.setPos(48, 0)
+            } else {
+                f = new sc.TextGui(ig.lang.get("sc.gui.menu.seconds"), {
+                    font: sc.fontsystem.tinyFont,
+                    speed: ig.TextBlock.SPEED.IMMEDIATE
+                });
+                f.setAlign(ig.GUI_ALIGN.X_RIGHT, ig.GUI_ALIGN.Y_TOP);
+                f.setPos(3, -1);
+                this.addChildGui(f);
+                this.currentNumber = new sc.NumberGui(999);
+                this.currentNumber.setAlign(ig.GUI_ALIGN.X_RIGHT, ig.GUI_ALIGN.Y_TOP);
+                this.currentNumber.setPos(19, 0)
+            }
+            this.addChildGui(this.currentNumber)
     }
 })
